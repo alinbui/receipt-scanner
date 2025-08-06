@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipt Scanner API Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .upload-form { border: 1px solid #ddd; padding: 20px; margin: 20px 0; }
+        .result { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 5px; }
+        .error { background: #ffe6e6; border: 1px solid #ffcccc; }
+        .success { background: #e6ffe6; border: 1px solid #ccffcc; }
+        pre { white-space: pre-wrap; word-wrap: break-word; }
+        #loading { display: none; color: #666; }
+    </style>
+</head>
+<body>
+    <h1>Receipt Scanner API Test</h1>
+    
+    <div class="upload-form">
+        <h3>Upload Receipt Image</h3>
+        <form id="uploadForm">
+            <input type="file" id="receiptFile" accept="image/*" required>
+            <br><br>
+            <input type="url" id="apiUrl" placeholder="API Endpoint (e.g., http://localhost:3000/api/process-receipt)" required>
+            <br><br>
+            <button type="submit">Process Receipt</button>
+        </form>
+        <div id="loading">Processing... This may take a few seconds.</div>
+    </div>
+    
+    <div id="result" class="result" style="display: none;">
+        <h3>Result:</h3>
+        <pre id="resultContent"></pre>
+    </div>
+    
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fileInput = document.getElementById('receiptFile');
+            const apiUrlInput = document.getElementById('apiUrl');
+            const resultDiv = document.getElementById('result');
+            const resultContent = document.getElementById('resultContent');
+            const loading = document.getElementById('loading');
+            
+            if (!fileInput.files[0]) {
+                alert('Please select a file');
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('receipt', fileInput.files[0]);
+            
+            loading.style.display = 'block';
+            resultDiv.style.display = 'none';
+            
+            try {
+                const response = await fetch(apiUrlInput.value, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                resultDiv.className = response.ok ? 'result success' : 'result error';
+                resultContent.textContent = JSON.stringify(data, null, 2);
+                resultDiv.style.display = 'block';
+                
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultContent.textContent = `Network Error: ${error.message}`;
+                resultDiv.style.display = 'block';
+            } finally {
+                loading.style.display = 'none';
+            }
+        });
+        
+        // Set default API URL if running locally
+        document.getElementById('apiUrl').value = 'http://localhost:3000/api/process-receipt';
+    </script>
+</body>
+</html>
