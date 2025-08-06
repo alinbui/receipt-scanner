@@ -1,0 +1,37 @@
+{
+  "receipt_info": {
+    "merchant_name": "SALA",
+    "address": "147 Nguyen Co Thach, An Loi Dong Ward, District 2, HCMC",
+    "date": "2019-03-16",
+    "time": "09:31",
+    "server": "TAI.SL",
+    "guest_count": 1
+  },
+  "items": [
+    {
+      "name": "Cheesecake Red Velvet",
+      "quantity": 1,
+      "unit_price": 69000,
+      "total_price": 69000,
+      "currency": "VND"
+    },
+    {
+      "name": "Cold Brew Iced Coffee - LARGE",
+      "quantity": 1,
+      "unit_price": 84000,
+      "total_price": 84000,
+      "currency": "VND"
+    }
+  ],
+  "totals": {
+    "subtotal": 153000,
+    "tax": 13909,
+    "total": 153000,
+    "payment_method": "CASH",
+    "payment_amount": 203000,
+    "change": 50000,
+    "currency": "VND"
+  },
+  "expense_category": "Meals & Entertainment",
+  "business_purpose": "Business meal"
+}

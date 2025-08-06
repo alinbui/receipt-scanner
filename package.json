@@ -1,0 +1,23 @@
+{
+  "name": "receipt-scanner",
+  "version": "1.0.0",
+  "description": "Receipt scanning and expense report generation using Google Generative AI",
+  "main": "receipt-processor.js",
+  "type": "module",
+  "scripts": {
+    "start": "node receipt-processor.js"
+  },
+  "keywords": [
+    "receipt",
+    "expense",
+    "ai",
+    "scanner"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@google/generative-ai": "^0.21.0",
+    "dotenv": "^17.2.1",
+    "node-fetch": "^3.3.2"
+  }
+}
